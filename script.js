@@ -10,7 +10,7 @@ const lose = document.querySelector("#lose");
 let userChoose;
 let compChoose;
 
-paperBtn.addEventListener("click", () => {
+function paperClick() {
   userHand.classList.add("shake");
   compHand.classList.add("shake");
   rpc = "paper";
@@ -18,6 +18,7 @@ paperBtn.addEventListener("click", () => {
   compChoose = Math.floor(Math.random() * 3);
 
   hideResult();
+  disableBtn();
 
   setTimeout(function () {
     showPlayer(rpc);
@@ -29,16 +30,18 @@ paperBtn.addEventListener("click", () => {
 
   setTimeout(function () {
     showResult(userChoose, compChoose);
-  }, 2050);
-});
+  }, 2000);
+}
+paperBtn.addEventListener("click", paperClick);
 
-rockBtn.addEventListener("click", () => {
+function rockClick() {
   userHand.classList.add("shake");
   compHand.classList.add("shake");
   rpc = "rock";
   userChoose = 1;
   compChoose = Math.floor(Math.random() * 3);
 
+  disableBtn();
   hideResult();
 
   setTimeout(function () {
@@ -51,16 +54,18 @@ rockBtn.addEventListener("click", () => {
 
   setTimeout(function () {
     showResult(userChoose, compChoose);
-  }, 2050);
-});
+  }, 2000);
+}
+rockBtn.addEventListener("click", rockClick);
 
-scissorsBtn.addEventListener("click", () => {
+function scissorsClick() {
   userHand.classList.add("shake");
   compHand.classList.add("shake");
   rpc = "scissors";
   userChoose = 2;
   compChoose = Math.floor(Math.random() * 3);
 
+  disableBtn();
   hideResult();
 
   setTimeout(function () {
@@ -73,8 +78,9 @@ scissorsBtn.addEventListener("click", () => {
 
   setTimeout(function () {
     showResult(userChoose, compChoose);
-  }, 2050);
-});
+  }, 2000);
+}
+scissorsBtn.addEventListener("click", scissorsClick);
 
 function showPlayer(rpc) {
   userHand.className = "";
@@ -106,6 +112,26 @@ function showResult(a, b) {
   ) {
     win.classList.toggle("hidden");
   } else lose.classList.toggle("hidden");
+
+  document.querySelector("#buttons").classList.remove("disabled");
+  paperBtn.addEventListener("click", paperClick);
+  rockBtn.addEventListener("click", rockClick);
+  scissorsBtn.addEventListener("click", scissorsClick);
+
+  paperBtn.style.cursor = "pointer";
+  rockBtn.style.cursor = "pointer";
+  scissorsBtn.style.cursor = "pointer";
+}
+
+function disableBtn() {
+  document.querySelector("#buttons").classList.add("disabled");
+  paperBtn.removeEventListener("click", paperClick);
+  rockBtn.removeEventListener("click", rockClick);
+  scissorsBtn.removeEventListener("click", scissorsClick);
+
+  paperBtn.style.cursor = "initial";
+  rockBtn.style.cursor = "initial";
+  scissorsBtn.style.cursor = "initial";
 }
 
 function hideResult() {

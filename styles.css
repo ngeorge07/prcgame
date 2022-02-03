@@ -5,7 +5,7 @@ body {
   color: #eee;
 }
 
-button:hover {
+button {
   cursor: pointer;
 }
 
